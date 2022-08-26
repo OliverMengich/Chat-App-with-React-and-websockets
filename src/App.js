@@ -1,23 +1,21 @@
-import logo from './logo.svg';
+import React,{useState} from 'react';
 import './App.css';
-
+import { io} from'socket.io-client';
+import Chatter from './components/chat/chatter';
+const socket = io('ws://localhost:4000');
 function App() {
+  const [message,setMessage] = useState('');
+  socket.on('Hello_client',(args)=>{
+    console.log(args)
+    setMessage(args.msg)
+  })
+  socket.emit('Hello_Server',{
+    msg: 'Doing great, how are you'
+  })
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>{message}</h1>
+      <Chatter />
     </div>
   );
 }
