@@ -1,21 +1,21 @@
-import React,{useState} from 'react';
+import React from 'react';
 import './App.css';
-import { io} from'socket.io-client';
+// import { io} from'socket.io-client';
 import Chatter from './components/chat/chatter';
-const socket = io('ws://localhost:4000');
+// const socket = io('ws://localhost:4000');
 function App() {
-  const [message,setMessage] = useState('');
-  socket.on('Hello_client',(args)=>{
-    console.log(args)
-    setMessage(args.msg)
-  })
-  socket.emit('Hello_Server',{
-    msg: 'Doing great, how are you'
-  })
+  // const [message,setMessage] = useState('');
+  // socket.on('connect',()=>{
+  //   console.log('User connected')
+  // })
+  // socket.on('Hello_Client',(args)=>{
+  //   console.log(args.msg)
+  //   setMessage(args.msg)
+  // })
   return (
     <div className="App">
-      <h1>{message}</h1>
-      <Chatter />
+      <h1>Hello_Client</h1>
+      <Chatter name='Oliver' />
     </div>
   );
 }
